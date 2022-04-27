@@ -1,6 +1,7 @@
 package com.example.pp_3_1_3.controller;
 
 
+import com.example.pp_3_1_3.model.Role;
 import com.example.pp_3_1_3.model.User;
 import com.example.pp_3_1_3.service.RoleService;
 import com.example.pp_3_1_3.service.UserService;
@@ -28,6 +29,13 @@ public class AdminController {
 
     @GetMapping()
     public String adminPage(Model model, Principal principal) {
+        StringBuilder roles = new StringBuilder();
+        for(Role role : userService.getUserByUsername(principal.getName()).getRoleSet()) {
+            roles.append(role.toString());
+            roles.append(" ");
+        }
+
+        model.addAttribute("thisUserRoles", roles);
         model.addAttribute("thisUser", userService.getUserByUsername(principal.getName()));
 
         model.addAttribute("users", userService.getAllUsers());

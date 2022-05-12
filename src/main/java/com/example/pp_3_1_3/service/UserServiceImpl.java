@@ -44,6 +44,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void updateUser(User user) {
+        if (user.getPassword() == null) {
+            user.setPassword(userDAO.getById(user.getId()).getPassword());
+        }
         if (!user.getPassword().equals(userDAO.getById(user.getId()).getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }

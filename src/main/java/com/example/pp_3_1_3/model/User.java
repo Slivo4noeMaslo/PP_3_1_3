@@ -1,5 +1,7 @@
 package com.example.pp_3_1_3.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -23,7 +25,8 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @Fetch(FetchMode.JOIN)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -76,15 +79,6 @@ public class User implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-//    public User(String email, String password, int age, String firstName, String lastName, Set<Role> roleSet) {
-//        this.email = email;
-//        this.password = password;
-//        this.age = age;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.roleSet = roleSet;
-//    }
 
     public User() {
     }

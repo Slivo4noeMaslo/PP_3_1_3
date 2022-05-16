@@ -47,10 +47,6 @@ public class AdminController {
         for (String role : roles) {
             user.getRoleSet().add(roleService.getRole(role));
         }
-
-        System.out.println(user.getId() + '\n' + user.getFirstName() + '\n'
-                + user.getLastName() + '\n' + user.getAge() + '\n' + user.getEmail()
-                + '\n' + user.getPassword() + '\n' + user.getRoleSet());
         userService.saveUser(user);
         return "redirect:/admin";
     }
@@ -61,13 +57,6 @@ public class AdminController {
         for (String role : roles) {
             user.getRoleSet().add(roleService.getRole(role));
         }
-        System.out.println(user.getId());
-        System.out.println(user.getFirstName());
-        System.out.println(user.getLastName());
-        System.out.println(user.getAge());
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
-        System.out.println(user.getRoleSet());
         userService.updateUser(user);
         return "redirect:/admin";
     }

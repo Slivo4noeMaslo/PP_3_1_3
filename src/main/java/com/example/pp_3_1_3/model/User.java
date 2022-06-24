@@ -30,13 +30,13 @@ public class User implements UserDetails {
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "roles_id")
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roleSet;
+    private Set<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roleSet;
+        return roles;
     }
 
     public String getPassword() {
@@ -45,7 +45,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return getEmail();
     }
 
     @Override
@@ -123,14 +123,14 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    public Set<Role> getRoleSet() {
-        if (roleSet == null) {
-            roleSet = new HashSet<>();
+    public Set<Role> getRoles() {
+        if (roles == null) {
+            roles = new HashSet<>();
         }
-        return roleSet;
+        return roles;
     }
 
-    public void setRoleSet(Set<Role> roleSet) {
-        this.roleSet = roleSet;
+    public void setRoles(Set<Role> roleSet) {
+        this.roles = roleSet;
     }
 }

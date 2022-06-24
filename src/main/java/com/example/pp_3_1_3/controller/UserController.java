@@ -1,38 +1,29 @@
 package com.example.pp_3_1_3.controller;
 
 import com.example.pp_3_1_3.model.Role;
-import com.example.pp_3_1_3.service.RoleService;
-import com.example.pp_3_1_3.service.UserService;
+import com.example.pp_3_1_3.model.User;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
-    private RoleService roleService;
-
-    public UserController(UserService userService, RoleService roleService) {
-        this.userService = userService;
-        this.roleService = roleService;
-    }
-
     @GetMapping()
-    public String getUser(Model model, Principal principal) {
+    public String getUser(Model model, Authentication auth) {
 
         StringBuilder roles = new StringBuilder();
-        for (Role role : userService.getUserByUsername(principal.getName()).getRoleSet()) {
+        User user = (User) auth.getPrincipal();
+        for (Role role : user.getRoles()) {
             roles.append(role.toString());
             roles.append(" ");
         }
 
         model.addAttribute("thisUserRoles", roles);
-        model.addAttribute("thisUser", userService.getUserByUsername(principal.getName()));
+        model.addAttribute("thisUser", user);
         return "userPage";
     }
 }

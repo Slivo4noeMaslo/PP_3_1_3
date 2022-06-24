@@ -28,10 +28,10 @@ public class InitUsers {
         roleService.addRole(roleUser);
 
         User user = new User("user@mail.ru", "user", 30, "user", "user");
-        user.getRoleSet().add(roleUser);
+        user.getRoles().add(roleService.getRole(2L));
         User admin = new User("admin@mail.ru", "admin",  35, "admin", "admin");
-        admin.getRoleSet().add(roleAdmin);
-        admin.getRoleSet().add(roleUser);
+        admin.getRoles().add(roleService.getRole(1L));
+        admin.getRoles().add(roleService.getRole(2L));
         userService.saveUser(admin);
         userService.saveUser(user);
     }

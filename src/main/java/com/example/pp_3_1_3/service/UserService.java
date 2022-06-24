@@ -8,8 +8,6 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    User getUser(long id);
-
     User getUserByUsername(String username);
 
     void saveUser(User user);

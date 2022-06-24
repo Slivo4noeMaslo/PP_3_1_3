@@ -41,8 +41,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        String roleName = name.substring(5, name.length());
-        return roleName;
+        return name.substring(5, name.length());
     }
 
     @Override

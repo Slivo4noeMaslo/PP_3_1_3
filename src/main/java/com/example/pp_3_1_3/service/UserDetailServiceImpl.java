@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     public UserDetailServiceImpl(UserDAO userDAO) {
         this.userDAO = userDAO;

@@ -99,7 +99,7 @@
                                             <td th:text="${user.getLastName()}"></td>
                                             <td th:text="${user.getAge()}"></td>
                                             <td th:text="${user.getEmail()}"></td>
-                                            <td th:text="${user.getRoleSet()}"></td>
+                                            <td th:text="${user.getRoles()}"></td>
                                             <td>
                                                 <a class="btn btn-info" role="button" data-toggle="modal"
                                                    data-target="#edit"
@@ -159,12 +159,11 @@
                                                                    th:id="password"/>
                                                         </label>
                                                     </p>
-                                                    <label class="container-fluid"
-                                                           th:for="roleSet"><strong>Role</strong>
-                                                        <select class="form-control" name="roleSet" multiple size="2">
+                                                    <label class="container-fluid"><strong>Role</strong>
+                                                        <select class="form-control" name="roles" multiple size="2">
                                                             <div th:each="role : ${roles}">
                                                                 <option th:text="${role.toString()}"
-                                                                        th:value="${role.getId()}" name="roleSet"/>
+                                                                        th:value="${role.getId()}"/>
                                                             </div>
                                                         </select>
                                                     </label>
@@ -204,7 +203,7 @@
                                     <td th:text="${thisUser.getLastName()}">Last Name</td>
                                     <td th:text="${thisUser.getAge()}">Age</td>
                                     <td th:text="${thisUser.getEmail()}">Email</td>
-                                    <td th:text="${thisUser.getRoleSet()}">Role</td>
+                                    <td th:text="${thisUser.getRoles()}">Role</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -263,11 +262,11 @@
                                         <input class="form-control" type="password" name="password" id="password" th:value="*{password}">
                                     </label>
                                 </p>
-                                <label class="container-fluid col-6" for="roleSet"><strong>Role</strong>
-                                    <select class="form-control" id="roleSet" name="roleSet" multiple size="2">
+                                <label class="container-fluid col-6" for="roles"><strong>Role</strong>
+                                    <select class="form-control" id="roles" name="roles" multiple size="2">
                                         <div th:each="role : ${roles}">
-                                            <option th:text="${role.toString()}" th:value="${role.getId()}" name="roleSet"
-                                                    th:selected="${editUser.getRoleSet().contains(role.getName())}"/>
+                                            <option th:text="${role.toString()}" th:value="${role.getId()}"
+                                                    th:selected="${editUser.getRoles().contains(role)}"/>
                                         </div>
                                     </select>
                                 </label>
@@ -327,11 +326,11 @@
                                         <input class="form-control" type="number" name="email" id="deleteEmail" th:value="*{id}" disabled>
                                     </label>
                                 </p>
-                                <label class="container-fluid col-6" for="deleteRoleSet"><strong>Role</strong>
-                                    <select class="form-control" id="deleteRoleSet" name="roleSet" multiple size="2" disabled>
+                                <label class="container-fluid col-6" for="deleteRoles"><strong>Role</strong>
+                                    <select class="form-control" id="deleteRoles" name="roles" multiple size="2" disabled>
                                         <div th:each="role : ${roles}">
-                                            <option th:text="${role.toString()}" th:value="${role.getId()}" name="roleSet"
-                                                    th:selected="${deleteUser.getRoleSet().contains(role.getName())}"/>
+                                            <option th:text="${role.toString()}" th:value="${role.getId()}"
+                                                    th:selected="${deleteUser.getRoles().contains(role)}"/>
                                         </div>
                                     </select>
                                 </label>
